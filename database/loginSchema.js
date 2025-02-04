@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { dynamoClient, GetCommand, PutCommand } = require('./dynamoDB');
+const { dynamoClient, GetCommand, PutCommand, ScanCommand } = require('./dynamoDB');
 const jwt = require('jsonwebtoken');
 
 const TABLE_NAME = 'users';
@@ -92,6 +92,9 @@ exports.isAuth = async (req, res, next) => {
         const result = await dynamoClient.send(params);
         console.log(result)
         if (result.Item) {
+            req.body.auth = {
+                email: result.Item.email
+            }
             next();
         } else {
             return res.status(401).json({ message: "Unauthorized: User not found" });

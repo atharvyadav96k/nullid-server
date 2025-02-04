@@ -1,7 +1,7 @@
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, GetCommand, PutCommand } = require("@aws-sdk/lib-dynamodb");
+const { DynamoDBDocumentClient, GetCommand, PutCommand, ScanCommand } = require("@aws-sdk/lib-dynamodb");
 
-// Initialize DynamoDB Client
+
 const client = new DynamoDBClient({
     region: process.env.AWS_DEFAULT_REGION,
     credentials: {
@@ -13,4 +13,4 @@ const client = new DynamoDBClient({
 // Document Client for easy DynamoDB operations
 const dynamoClient = DynamoDBDocumentClient.from(client);
 
-module.exports = { dynamoClient, GetCommand, PutCommand };
+module.exports = { dynamoClient, GetCommand, PutCommand, ScanCommand };
