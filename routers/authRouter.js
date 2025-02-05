@@ -8,7 +8,7 @@ aRouter.post('/sign-up', async (req, res) => {
     try {
         let ip = req.ip;
         if (req.headers['x-forwarded-for']) {
-            ip = req.headers['x-forwarded-for'].split(',')[0]; // Get the first IP in the list
+            ip = req.headers['x-forwarded-for'].split(',')[0];
         }
         const loc = await address(ip);
         const result = await signUp(email, password, loc);
